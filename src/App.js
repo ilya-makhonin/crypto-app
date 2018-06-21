@@ -8,6 +8,8 @@ import RatesList from './app/components/exchangeRates/RatesList';
 import CryptoList from './app/components/crypto/CryptoList';
 import CryptoInfo from './app/pages/CryptoInfo';
 import TopPositions from './app/components/topCrypto/TopPositions';
+import Search from './app/components/search/Search';
+
 
 class App extends Component {
   state = {
@@ -65,6 +67,12 @@ class App extends Component {
           <div className="content_container">
               <aside className="add_info">
                   <RatesList data={ratesList} isFetching={isFetchingRates}/>
+                  <Search
+                      data={cryptoList}
+                      isFetching={isFetchingCrypto}
+                      searchName={null}
+                      filterPrice={null}
+                  />
                   <TopPositions data={cryptoList} isFetching={isFetchingCrypto}/>
               </aside>
 
@@ -80,7 +88,6 @@ class App extends Component {
                   </div>
               </main>
           </div>
-
       </div>
     );
   }
