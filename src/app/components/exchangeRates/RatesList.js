@@ -12,8 +12,10 @@ function RatesList({ data, isFetching }) {
         <div className="exchange">
             {
                 isFetching
-                    ? <div>Loading...</div>
-                    : ratesArray.map((item, index) => {
+                    ?
+                    <div>Loading...</div>
+                    :
+                    ratesArray.map((item, index) => {
                         return <RatesItem key={index + 'rat'} {...item}/>;
                     })
             }

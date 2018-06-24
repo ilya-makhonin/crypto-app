@@ -12,89 +12,116 @@ import Search from './app/components/search/Search';
 
 
 class App extends Component {
-  state = {
-      crypto: {
-          cryptoList: [],
-          isFetchingCrypto: true
-      },
-      rates: {
-          ratesList: {},
-          isFetchingRates: true
-      }
-  };
+    state = {
+        greatData: [],
+        crypto: {
+            cryptoList: [],
+            isFetchingCrypto: true
+        },
+        rates: {
+            ratesList: {},
+            isFetchingRates: true
+        }
+    };
 
-  getExchangeData = () => {
-      axios.get('https://api.coinmarketcap.com/v2/ticker/?structure=array&sort=id')
-          .then( response => {
-              let {data: { data }} = response;
-              const crypto = {
-                  cryptoList: data,
-                  isFetchingCrypto: false
-              };
+    getExchangeData = () => {
+        axios.get('https://api.coinmarketcap.com/v2/ticker/?structure=array&sort=id')
+            .then( response => {
+                let {data: { data }} = response;
+                const crypto = {
+                    cryptoList: data,
+                    isFetchingCrypto: false
+                };
 
-              this.getRates(crypto);
-          })
-          .catch( error => console.log(error));
-  };
+                this.getRates(crypto);
+            })
+            .catch( error => console.log(error));
+    };
 
-  getRates = (updateData) => {
-      axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
-          .then( response => {
-              let { data: { Valute } } = response;
-              const crypto = updateData;
-              const rates = {
-                  ratesList: Valute,
-                  isFetchingRates: false
-              };
+    getRates = (updateData) => {
+        axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
+            .then( response => {
+                let { data: { Valute } } = response;
+                const crypto = updateData;
+                const greatData = crypto.cryptoList;
+                const rates = {
+                    ratesList: Valute,
+                    isFetchingRates: false
+                };
 
-              this.setState({ crypto, rates });
-          })
-          .catch( error => {
-              console.log(error);
-          });
-  };
+                this.setState({ greatData, crypto, rates });
+            })
+            .catch( error => {
+                console.log(error);
+            });
+    };
 
-  render() {
-    const {
-        crypto: {cryptoList, isFetchingCrypto },
-        rates: { ratesList, isFetchingRates }
-    } = this.state;
+    render() {
+        const {
+            greatData,
+            crypto: {cryptoList, isFetchingCrypto },
+            rates: { ratesList, isFetchingRates }
+        } = this.state;
 
-    return (
-      <div className="App">
-          <Header>Crypto</Header>
+        return (
+            <div className="App">
+                <Header>Crypto</Header>
 
-          <div className="content_container">
-              <aside className="add_info">
-                  <RatesList data={ratesList} isFetching={isFetchingRates}/>
-                  <Search
-                      data={cryptoList}
-                      isFetching={isFetchingCrypto}
-                      searchName={null}
-                      filterPrice={null}
-                  />
-                  <TopPositions data={cryptoList} isFetching={isFetchingCrypto}/>
-              </aside>
+                <div className="content_container">
+                    <aside className="add_info">
+                        <RatesList data={ratesList} isFetching={isFetchingRates}/>
+                        <Search
+                            data={greatData}
+                            isFetching={isFetchingCrypto}
+                            searchName={this.searchName}
+                            filterPrice={this.filterPrice}
+                        />
+                        <TopPositions data={greatData} isFetching={isFetchingCrypto}/>
+                    </aside>
 
-              <main className="main">
-                  <div className="main_layout">
-                      <Route exact path="/" render={() => (
-                          <CryptoList data={cryptoList} isFetching={isFetchingCrypto}/>
-                      )} />
+                    <main className="main">
+                        <div className="main_layout">
+                            <Route exact path="/" render={() => (
+                                <CryptoList data={cryptoList} isFetching={isFetchingCrypto}/>
+                            )} />
 
-                      <Route path="/:crname" render={ props => (
-                          <CryptoInfo data={cryptoList} {...props}/>
-                      )}/>
-                  </div>
-              </main>
-          </div>
-      </div>
-    );
-  }
+                            <Route path="/:crname" render={ props => (
+                                <CryptoInfo data={cryptoList} {...props}/>
+                            )}/>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        );
+    }
 
-  componentDidMount() {
-    this.getExchangeData();
-  }
+    componentDidMount() {
+        this.getExchangeData();
+    }
+
+    searchName = event => {
+        let nameCrypto = (event.target.value).toLocaleLowerCase();
+
+        let result = this.state.greatData.filter(item => {
+            return item.website_slug.includes(nameCrypto);
+        });
+
+        const crypto = {
+            cryptoList: result,
+            isFetchingCrypto: this.state.crypto.isFetchingCrypto
+        };
+
+        this.setState({ crypto });
+    };
+
+    filterPrice = event => {
+        console.log(event.target.value);
+        if (event.target.name === 'max-price') {
+
+        } else {
+
+        }
+    };
 }
 
 export default App;
