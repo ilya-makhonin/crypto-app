@@ -3,7 +3,7 @@ import CryptoItem from './CryptoItem';
 
 function CryptoList({ data, isFetching }) {
     return (
-        <div className="crypto_list">
+        <section className="crypto_list">
             {
                 isFetching
                     ?
@@ -17,7 +17,7 @@ function CryptoList({ data, isFetching }) {
                         :
                         <div>Нечего не найдено</div>
             }
-        </div>
+        </section>
     );
 }
 

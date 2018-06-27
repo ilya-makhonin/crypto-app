@@ -9,10 +9,10 @@ function Search({ data, isFetching, searchName, filterPrice }) {
             ?
             <div>Loading</div>
             :
-            <div>
+            <section className="search_section">
                 <SearchName searchName={searchName}/>
                 <FilterPrice data={data} filterPrice={filterPrice}/>
-            </div>
+            </section>
     );
 }
 

@@ -9,7 +9,7 @@ function RatesList({ data, isFetching }) {
     }
 
     return (
-        <div className="exchange">
+        <section className="exchange">
             {
                 isFetching
                     ?
@@ -19,7 +19,7 @@ function RatesList({ data, isFetching }) {
                         return <RatesItem key={index + 'rat'} {...item}/>;
                     })
             }
-        </div>
+        </section>
     );
 }
 

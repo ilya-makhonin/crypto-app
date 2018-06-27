@@ -73,8 +73,8 @@ class App extends Component {
                         <Search
                             data={greatData}
                             isFetching={isFetchingCrypto}
-                            searchName={this.searchName}
-                            filterPrice={this.filterPrice}
+                            searchName={this.search}
+                            filterPrice={this.search}
                         />
                         <TopPositions data={greatData} isFetching={isFetchingCrypto}/>
                     </aside>
@@ -86,7 +86,7 @@ class App extends Component {
                             )} />
 
                             <Route path="/:crname" render={ props => (
-                                <CryptoInfo data={cryptoList} {...props}/>
+                                <CryptoInfo data={greatData} {...props}/>
                             )}/>
                         </div>
                     </main>
@@ -99,11 +99,20 @@ class App extends Component {
         this.getExchangeData();
     }
 
-    searchName = event => {
-        let nameCrypto = (event.target.value).toLocaleLowerCase();
+    search = () => {
+        const name = document.getElementById('searchName').value;
+        const min = parseFloat(document.getElementById('searchPriceMin').value);
+        const max = parseFloat(document.getElementById('searchPriceMax').value);
+        const nameCrypto = name.toLowerCase();
+        const minVale = !isNaN(min) ? min : '';
+        const maxVale = !isNaN(max) ? max : Infinity;
 
-        let result = this.state.greatData.filter(item => {
-            return item.website_slug.includes(nameCrypto);
+        let result = this.state.greatData.filter( item => {
+            return (
+                item.website_slug.includes(nameCrypto)
+                && item.quotes.USD.price > minVale
+                && item.quotes.USD.price < maxVale
+            );
         });
 
         const crypto = {
@@ -112,15 +121,6 @@ class App extends Component {
         };
 
         this.setState({ crypto });
-    };
-
-    filterPrice = event => {
-        console.log(event.target.value);
-        if (event.target.name === 'max-price') {
-
-        } else {
-
-        }
     };
 }
 

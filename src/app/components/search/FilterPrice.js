@@ -9,14 +9,16 @@ function FilterPrice({ data, filterPrice }) {
     const max = Math.ceil(rangeValue[0].quotes.USD.price);
 
     return (
-        <div>
+        <div className="search_price">
             <input
+                id="searchPriceMin"
                 type="text"
                 name="min-price"
                 placeholder="Enter min price"
                 onChange={filterPrice}
             />
             <input
+                id="searchPriceMax"
                 type="text"
                 name="max-price"
                 placeholder={`Max price: ${max}$ - ${rangeValue[0].name}`}

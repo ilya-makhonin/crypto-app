@@ -25,7 +25,7 @@ function TopPositions({ data, isFetching }) {
     }).slice(0, 5);
 
     return (
-        <div className="top_char">
+        <section className="top_char">
             {
                 isFetching
                     ?
@@ -35,7 +35,7 @@ function TopPositions({ data, isFetching }) {
                         return <CryptoItem key={index + 'top'} imageSize="32x32" {...item} />;
                     })
             }
-        </div>
+        </section>
     );
 }
 
