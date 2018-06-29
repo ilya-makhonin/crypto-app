@@ -9,6 +9,7 @@ import CryptoList from './app/components/crypto/CryptoList';
 import CryptoInfo from './app/pages/CryptoInfo';
 import TopPositions from './app/components/topCrypto/TopPositions';
 import Search from './app/components/search/Search';
+import Currency from './app/pages/Currency';
 
 
 class App extends Component {
@@ -87,6 +88,10 @@ class App extends Component {
 
                             <Route path="/:crname" render={ props => (
                                 <CryptoInfo data={greatData} {...props}/>
+                            )}/>
+
+                            <Route path="/fullCurrency" render={ () => (
+                                <Currency data={ratesList} isFetching={isFetchingRates}/>
                             )}/>
                         </div>
                     </main>

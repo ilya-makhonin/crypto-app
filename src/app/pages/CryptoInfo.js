@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function CryptoInfo({ data, match }) {
-    let result = null;
-    data.forEach(item => {
+    return data.map((item, index) => {
         if (item.id === Number(match.params.crname)) {
             const { id, name, symbol, quotes: { USD }} = item;
-            result = (
-                <div className="crypto_full">
+            return (
+                <div className="crypto_full" key={'select' + index}>
                     <img
                         src={`https://s2.coinmarketcap.com/static/img/coins/128x128/${id}.png`}
                         alt={`${name} picture`}
@@ -24,8 +23,6 @@ function CryptoInfo({ data, match }) {
             );
         }
     });
-
-    return result;
 }
 
 export default CryptoInfo;

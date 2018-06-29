@@ -46,6 +46,14 @@
     overflow: auto;
 }
 
+.exchange_full_list {
+
+}
+
+.exchange_list {
+
+}
+
 .money_item {
     border: 1px solid black;
     border-radius: 10px;
@@ -113,4 +121,10 @@
 
 .crypto_item_price {
 
+}
+
+.currency_full_list {
+    width: inherit;
+    height: inherit;
+    overflow: auto;
 }
