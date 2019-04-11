@@ -7,7 +7,7 @@ function CryptoItem({ id, name, symbol, quotes, imageSize }) {
             <div className="crypto_item">
                 <img
                     src={`https://s2.coinmarketcap.com/static/img/coins/${imageSize}/${id}.png`}
-                    alt={`${name} picture`}
+                    alt={`${name}`}
                 />
                 <p className="crypto_item_name">{name}</p>
                 <p className="crypto_item_symbol">{symbol}</p>
