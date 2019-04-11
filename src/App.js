@@ -26,17 +26,17 @@ class App extends Component {
     };
 
     getExchangeData = () => {
-        axios.get('https://api.coinmarketcap.com/v2/ticker/?structure=array&sort=id')
+        axios.get('https://api.coinmarketcap.com/v2/ticker/',
+            { headers: {'Access-Control-Allow-Origin': '*' }})
             .then( response => {
                 let {data: { data }} = response;
                 const crypto = {
                     cryptoList: data,
                     isFetchingCrypto: false
                 };
-
                 this.getRates(crypto);
             })
-            .catch( error => console.log(error));
+            .catch( error => console.log('This is getExchangeData', error));
     };
 
     getRates = (updateData) => {
@@ -53,7 +53,7 @@ class App extends Component {
                 this.setState({ greatData, crypto, rates });
             })
             .catch( error => {
-                console.log(error);
+                console.log('This is getRates', error);
             });
     };
 
