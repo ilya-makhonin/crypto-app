@@ -9,7 +9,7 @@ function CryptoInfo({ data, match }) {
                 <div className="crypto_full" key={'select' + index}>
                     <img
                         src={`https://s2.coinmarketcap.com/static/img/coins/128x128/${id}.png`}
-                        alt={`${name} picture`}
+                        alt={`${name}`}
                     />
                     <p>{ name }</p>
                     <p>{ symbol }</p>
