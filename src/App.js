@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import './app/styles/App.css';
+import './app/styles/App.scss';
 
 import Header from './app/components/header/Header';
 import RatesList from './app/components/exchangeRates/RatesList';
