@@ -5,5 +5,6 @@ A simple application to track the cryptocurrency rate
 The application is written in React.js
 
 ### TODO:
-- [ ] Add styles (CSS-in-JS)
+- [ ] Fix a bug of response (Access-Control-Allow-Origin)
+- [ ] Add styles
 - [ ] Update API for getting exchange rates
