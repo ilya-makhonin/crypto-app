@@ -29,7 +29,7 @@ function TopPositions({ data, isFetching }) {
             {
                 isFetching
                     ?
-                    <div>Loading...</div>
+                    <div className="loading_moment">Loading...</div>
                     :
                     newData.map((item, index) => {
                         return <CryptoItem key={index + 'top'} imageSize="32x32" {...item} />;

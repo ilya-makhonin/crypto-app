@@ -7,7 +7,7 @@ function Search({ data, isFetching, searchName, filterPrice }) {
     return (
         isFetching
             ?
-            <div>Loading</div>
+            <div className="loading_moment">Loading</div>
             :
             <section className="search_section">
                 <SearchName searchName={searchName}/>

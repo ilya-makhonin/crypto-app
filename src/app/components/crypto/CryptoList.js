@@ -7,7 +7,7 @@ function CryptoList({ data, isFetching }) {
             {
                 isFetching
                     ?
-                    <div>Loading...</div>
+                    <div className="loading_moment">Loading...</div>
                     :
                     data.length
                         ?

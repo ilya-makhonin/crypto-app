@@ -13,7 +13,7 @@ function Currency({ data, isFetching }) {
             {
                 isFetching
                     ?
-                    <div>Loading...</div>
+                    <div className="loading_moment">Loading...</div>
                     :
                     ratesArray.map((item, index) => {
                         return <RatesItem key={index + 'ratFull'} {...item}/>;
