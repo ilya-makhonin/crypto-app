@@ -22,6 +22,7 @@ function CryptoInfo({ data, match }) {
                 </div>
             );
         }
+        return null;
     });
 }
 
