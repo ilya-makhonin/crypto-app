@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import './app/styles/App.scss';
+import './app/styles/App.css';
 
 import Header from './app/components/header/Header';
 import RatesList from './app/components/exchangeRates/RatesList';
@@ -26,17 +26,18 @@ class App extends Component {
     };
 
     getExchangeData = () => {
-        axios.get('https://api.coinmarketcap.com/v2/ticker/',
-            { headers: {'Access-Control-Allow-Origin': '*' }})
-            .then( response => {
-                let {data: { data }} = response;
-                const crypto = {
-                    cryptoList: data,
-                    isFetchingCrypto: false
-                };
-                this.getRates(crypto);
-            })
-            .catch( error => console.log('This is getExchangeData', error));
+        axios({
+            method:'get',
+            url: 'https://api.coinmarketcap.com/v2/ticker/?type=list'
+        }).then( response => {
+            let {data: { data }} = response;
+            const crypto = {
+                cryptoList: data,
+                isFetchingCrypto: false
+            };
+            console.log(response);
+            this.getRates(crypto);
+        }).catch( error => console.log('This is getExchangeData', error));
     };
 
     getRates = (updateData) => {
@@ -49,7 +50,6 @@ class App extends Component {
                     ratesList: Valute,
                     isFetchingRates: false
                 };
-
                 this.setState({ greatData, crypto, rates });
             })
             .catch( error => {
