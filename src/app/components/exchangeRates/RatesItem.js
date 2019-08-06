@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function RatesItem({ CharCode, Name, Value }) {
     return (
         <div className="money_item">
@@ -9,5 +10,6 @@ function RatesItem({ CharCode, Name, Value }) {
         </div>
     );
 }
+
 
 export default RatesItem;

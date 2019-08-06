@@ -1,6 +1,7 @@
 import React from 'react';
 import CryptoItem from './../crypto/CryptoItem';
 
+
 function treatment( first, second ) {
     const firstParams = first.quotes.USD;
     const secondParams = second.quotes.USD;
@@ -20,6 +21,7 @@ function treatment( first, second ) {
 
 function TopPositions({ data, isFetching }) {
     const newArr = data.slice();
+    
     const newData = newArr.sort((first, second) => {
         return treatment(first, second);
     }).slice(0, 5);
@@ -38,5 +40,6 @@ function TopPositions({ data, isFetching }) {
         </section>
     );
 }
+
 
 export default TopPositions;

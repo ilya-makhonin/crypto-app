@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 import RatesItem from './RatesItem';
 
+
 function RatesList({ data, isFetching }) {
     let ratesArray = [];
+
     for (let prop in data) {
         if (prop === 'EUR' || prop === 'USD' || prop === 'CAD') {
             ratesArray.push(data[prop]);
@@ -30,5 +32,6 @@ function RatesList({ data, isFetching }) {
         </section>
     );
 }
+
 
 export default RatesList;

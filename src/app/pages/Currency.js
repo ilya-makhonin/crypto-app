@@ -2,8 +2,10 @@ import React from 'react';
 import RatesItem from './../components/exchangeRates/RatesItem';
 import { Link } from 'react-router-dom';
 
+
 function Currency({ data, isFetching }) {
     let ratesArray = [];
+
     for (let prop in data) {
         ratesArray.push(data[prop]);
     }
@@ -23,5 +25,6 @@ function Currency({ data, isFetching }) {
         </div>
     );
 }
+
 
 export default Currency;

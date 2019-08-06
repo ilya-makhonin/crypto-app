@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function CryptoInfo({ data, match }) {
     return data.map((item, index) => {
         if (item.id === Number(match.params.crname)) {
             const { id, name, symbol, quotes: { USD }} = item;
+
             return (
                 <div className="crypto_full" key={'select' + index}>
                     <img
@@ -22,8 +24,10 @@ function CryptoInfo({ data, match }) {
                 </div>
             );
         }
+
         return null;
     });
 }
+
 
 export default CryptoInfo;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function SearchName({ searchName }) {
     return (
         <div className="search_name">
@@ -13,5 +14,6 @@ function SearchName({ searchName }) {
         </div>
     );
 }
+
 
 export default SearchName;

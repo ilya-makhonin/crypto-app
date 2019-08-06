@@ -1,7 +1,9 @@
 import React from 'react';
 
+
 function FilterPrice({ data, filterPrice }) {
     let rangeValue = data.slice();
+
     rangeValue.sort((first, second) => {
         return second.quotes.USD.price - first.quotes.USD.price
     });
@@ -27,5 +29,6 @@ function FilterPrice({ data, filterPrice }) {
         </div>
     );
 }
+
 
 export default FilterPrice;

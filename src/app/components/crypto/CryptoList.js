@@ -1,6 +1,7 @@
 import React from 'react';
 import CryptoItem from './CryptoItem';
 
+
 function CryptoList({ data, isFetching }) {
     return (
         <section className="crypto_list">
@@ -20,5 +21,6 @@ function CryptoList({ data, isFetching }) {
         </section>
     );
 }
+
 
 export default CryptoList;

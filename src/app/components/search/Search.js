@@ -3,6 +3,7 @@ import React from 'react';
 import SearchName from './SearchName';
 import FilterPrice from './FilterPrice';
 
+
 function Search({ data, isFetching, searchName, filterPrice }) {
     return (
         isFetching
@@ -15,5 +16,6 @@ function Search({ data, isFetching, searchName, filterPrice }) {
             </section>
     );
 }
+
 
 export default Search;

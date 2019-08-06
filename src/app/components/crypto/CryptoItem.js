@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function CryptoItem({ id, name, symbol, quotes, imageSize }) {
     return (
         <Link to={`/${id}`}>
@@ -16,5 +17,6 @@ function CryptoItem({ id, name, symbol, quotes, imageSize }) {
         </Link>
     );
 }
+
 
 export default CryptoItem;
