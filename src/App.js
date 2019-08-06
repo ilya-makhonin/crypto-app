@@ -27,10 +27,10 @@ class App extends Component {
 
     getExchangeData = () => {
         axios({
-            method:'get',
+            method: 'get',
             url: 'https://api.coinmarketcap.com/v2/ticker/?type=list'
         }).then( response => {
-            let {data: { data }} = response;
+            let { data: { data } } = response;
             const crypto = {
                 cryptoList: data,
                 isFetchingCrypto: false
@@ -40,7 +40,7 @@ class App extends Component {
         }).catch( error => console.log('This is getExchangeData', error));
     };
 
-    getRates = (updateData) => {
+    getRates = updateData => {
         axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
             .then( response => {
                 let { data: { Valute } } = response;
@@ -57,10 +57,38 @@ class App extends Component {
             });
     };
 
+    componentDidMount() {
+        this.getExchangeData();
+    }
+
+    search = () => {
+        const name = document.getElementById('searchName').value;
+        const min = parseFloat(document.getElementById('searchPriceMin').value);
+        const max = parseFloat(document.getElementById('searchPriceMax').value);
+        const nameCrypto = name.toLowerCase();
+        const minVale = !isNaN(min) ? min : '';
+        const maxVale = !isNaN(max) ? max : Infinity;
+
+        let result = this.state.greatData.filter(item => {
+            return (
+                item.website_slug.includes(nameCrypto)
+                && item.quotes.USD.price > minVale
+                && item.quotes.USD.price < maxVale
+            );
+        });
+
+        const crypto = {
+            cryptoList: result,
+            isFetchingCrypto: this.state.crypto.isFetchingCrypto
+        };
+
+        this.setState({ crypto });
+    };
+
     render() {
         const {
             greatData,
-            crypto: {cryptoList, isFetchingCrypto },
+            crypto: { cryptoList, isFetchingCrypto },
             rates: { ratesList, isFetchingRates }
         } = this.state;
 
@@ -99,34 +127,7 @@ class App extends Component {
             </div>
         );
     }
-
-    componentDidMount() {
-        this.getExchangeData();
-    }
-
-    search = () => {
-        const name = document.getElementById('searchName').value;
-        const min = parseFloat(document.getElementById('searchPriceMin').value);
-        const max = parseFloat(document.getElementById('searchPriceMax').value);
-        const nameCrypto = name.toLowerCase();
-        const minVale = !isNaN(min) ? min : '';
-        const maxVale = !isNaN(max) ? max : Infinity;
-
-        let result = this.state.greatData.filter( item => {
-            return (
-                item.website_slug.includes(nameCrypto)
-                && item.quotes.USD.price > minVale
-                && item.quotes.USD.price < maxVale
-            );
-        });
-
-        const crypto = {
-            cryptoList: result,
-            isFetchingCrypto: this.state.crypto.isFetchingCrypto
-        };
-
-        this.setState({ crypto });
-    };
 }
+
 
 export default App;
