@@ -26,31 +26,31 @@ class App extends Component {
     };
 
     getExchangeData = () => {
-        axios({
-            method: 'get',
-            url: 'https://api.coinmarketcap.com/v2/ticker/?type=list'
-        }).then( response => {
-            let { data: { data } } = response;
-            const crypto = {
-                cryptoList: data,
-                isFetchingCrypto: false
-            };
-            console.log(response);
-            this.getRates(crypto);
-        }).catch( error => console.log('This is getExchangeData', error));
+        axios.get('http://localhost:3000/api/coin')
+            .then( response => {
+                let { data: { data } } = response;
+
+                const crypto = {
+                    cryptoList: data,
+                    isFetchingCrypto: false
+                };
+
+                this.setState({ crypto });
+            }).catch( error => console.log('This is getExchangeData', error));
     };
 
-    getRates = updateData => {
-        axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
+    getRates = () => {
+        axios.get('http://localhost:3000/api/cbr')
             .then( response => {
                 let { data: { Valute } } = response;
-                const crypto = updateData;
                 const greatData = crypto.cryptoList;
+
                 const rates = {
                     ratesList: Valute,
                     isFetchingRates: false
                 };
-                this.setState({ greatData, crypto, rates });
+
+                this.setState({ greatData, rates });
             })
             .catch( error => {
                 console.log('This is getRates', error);
@@ -59,6 +59,7 @@ class App extends Component {
 
     componentDidMount() {
         this.getExchangeData();
+        this.getRates();
     }
 
     search = () => {
