@@ -1,10 +1,14 @@
 # Crypto App
 
-A simple application to track the cryptocurrency rate
-***
-The application is written in React.js
+A simple application to track the cryptocurrency rate. The application is develop on React.js
 
-### TODO:
-- [ ] Fix a bug of response (Access-Control-Allow-Origin)
-- [ ] Add styles
-- [ ] Update API for getting exchange rates
+***
+
+Technology stack:
+
++ React.js
++ React Router
++ Axios
++ Express.js
++ Morgan
++ Request
