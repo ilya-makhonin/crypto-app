@@ -1,5 +1,6 @@
 import React from 'react';
 import CryptoItem from './CryptoItem';
+import '../../styles/listCrypto.sass';
 
 
 function CryptoList({ data, isFetching }) {

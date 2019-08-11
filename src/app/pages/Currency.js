@@ -1,6 +1,7 @@
 import React from 'react';
 import RatesItem from './../components/exchangeRates/RatesItem';
 import { Link } from 'react-router-dom';
+import '../styles/currency.sass';
 
 
 function Currency({ data, isFetching }) {
