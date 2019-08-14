@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const request = require('request');
 const path = require('path');
+const cors = require('cors');
 
 
 const port = process.env.PORT || 3000;
@@ -13,7 +14,7 @@ const app = express();
 const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET');
-    res.header('Access-Control-Allow-Headers', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
     next();
 };
 
@@ -26,7 +27,7 @@ router.get('/coin', async (req, res) => {
 });
 
 router.get('/cbr', async (req, res) => {
-    request('https://www.cbr-xml-daily.ru/daily_json.js', (error, response, body) => {  
+    request('http://www.cbr-xml-daily.ru/daily_json.js', (error, response, body) => {  
         if (!error && response.statusCode == 200) {
             res.json(body);
         }
@@ -36,6 +37,7 @@ router.get('/cbr', async (req, res) => {
 
 app.set('port', port);
 
+app.use(cors());
 app.use(allowCrossDomain);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,10 +46,8 @@ app.use(morgan('dev'));
 app.use('/api', router);
 app.use('/', express.static(path.join(__dirname, '../dist')));
 
-app.listen(app.get('port'), () => {
-    console.log(`[OK] Server is running on localhost:${app.get('port')}`);
-});
 
+/* Create http server and wrapping app into the new server */
 const server = http.createServer(app);
 
 server.listen(port);
@@ -79,5 +79,5 @@ function onError(error) {
 }
   
 function onListening() {
-    console.log(port);
+    console.log(`http://localhost:${port}`);
 } 
