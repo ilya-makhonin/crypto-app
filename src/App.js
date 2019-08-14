@@ -34,8 +34,8 @@ class App extends Component {
                     cryptoList: data,
                     isFetchingCrypto: false
                 };
-
-                this.setState({ crypto });
+console.log('THIS', response)
+                this.setState({ crypto, greatData: data });
             }).catch( error => console.log('This is getExchangeData', error));
     };
 
@@ -43,14 +43,13 @@ class App extends Component {
         axios.get('http://localhost:3000/api/cbr')
             .then( response => {
                 let { data: { Valute } } = response;
-                const greatData = crypto.cryptoList;
 
                 const rates = {
                     ratesList: Valute,
                     isFetchingRates: false
                 };
 
-                this.setState({ greatData, rates });
+                this.setState({ rates });
             })
             .catch( error => {
                 console.log('This is getRates', error);
