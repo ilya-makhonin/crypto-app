@@ -28,21 +28,24 @@ class App extends Component {
     getExchangeData = () => {
         axios.get('http://localhost:3000/api/coin')
             .then( response => {
-                let { data: { data } } = response;
+                const { data: { body } } = response;
+                const { data } = JSON.parse(body);
+                const resultDataArray = Object.values(data);
 
                 const crypto = {
-                    cryptoList: data,
+                    cryptoList: resultDataArray,
                     isFetchingCrypto: false
                 };
-console.log('THIS', response)
-                this.setState({ crypto, greatData: data });
+
+                this.setState({ crypto, greatData: resultDataArray });
             }).catch( error => console.log('This is getExchangeData', error));
     };
 
     getRates = () => {
         axios.get('http://localhost:3000/api/cbr')
             .then( response => {
-                let { data: { Valute } } = response;
+                const { data: { body } } = response;
+                const { Valute } = JSON.parse(body);
 
                 const rates = {
                     ratesList: Valute,
