@@ -21,7 +21,7 @@ const allowCrossDomain = function(req, res, next) {
 router.get('/coin', async (req, res) => {
     request('https://api.coinmarketcap.com/v2/ticker/?type=list', (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            res.json(body);
+            res.json(response);
         }
     });
 });
@@ -29,7 +29,7 @@ router.get('/coin', async (req, res) => {
 router.get('/cbr', async (req, res) => {
     request('http://www.cbr-xml-daily.ru/daily_json.js', (error, response, body) => {  
         if (!error && response.statusCode == 200) {
-            res.json(body);
+            res.json(response);
         }
     });
 });
