@@ -12,3 +12,6 @@ Technology stack:
 + Express.js
 + Morgan
 + Request
+
+##### TODO:
+* Pictures is not show!
