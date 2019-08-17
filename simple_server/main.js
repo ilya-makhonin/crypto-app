@@ -34,6 +34,23 @@ router.get('/cbr', async (req, res) => {
     });
 });
 
+router.get('/icon/:size/:id', async (req, res) => {
+    const size = req.params.size;
+    const id = req.params.id;
+
+    const requestSetting = {
+        url: `https://s2.coinmarketcap.com/static/img/coins/${size}/${id}.png`,
+        method: 'GET',
+        encoding: null
+    };
+
+    request(requestSetting, (error, response, body) => {  
+        if (!error && response.statusCode == 200) {
+            res.set('Content-Type', 'image/png');
+            res.send(body);
+        }
+    });
+});
 
 app.set('port', port);
 
