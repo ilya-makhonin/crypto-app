@@ -7,7 +7,7 @@ function CryptoItem({ id, name, symbol, quotes, imageSize }) {
         <Link to={`/${id}`}>
             <div className="crypto_item">
                 <img
-                    src={`https://s2.coinmarketcap.com/static/img/coins/${imageSize}/${id}.png`}
+                    src={`http://localhost:3000/api/icon/${imageSize}/${id}`}
                     alt={`${name}`}
                     className="crypto_item_icon"
                 />
