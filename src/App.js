@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
+import request from './app/utils/request';
 import './app/styles/App.css';
 
 import Header from './app/components/header/Header';
@@ -26,7 +26,7 @@ class App extends Component {
     };
 
     getExchangeData = () => {
-        axios.get('http://localhost:3000/api/coin')
+        request('http://localhost:3000/api/coin')
             .then( response => {
                 const { data: { body } } = response;
                 const { data } = JSON.parse(body);
@@ -42,7 +42,7 @@ class App extends Component {
     };
 
     getRates = () => {
-        axios.get('http://localhost:3000/api/cbr')
+        request('http://localhost:3000/api/cbr')
             .then( response => {
                 const { data: { body } } = response;
                 const { Valute } = JSON.parse(body);
